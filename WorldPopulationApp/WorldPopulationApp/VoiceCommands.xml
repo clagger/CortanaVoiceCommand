@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="WorldpopulationCommandSet_en-us">
+    <CommandPrefix> Listen up </CommandPrefix>
+    <Example> show me the population of ghana in 2006 </Example>
+
+    <Command Name="showFuturePopulation">
+      <Example>  show me the population of ghana in 2006 </Example>
+      <ListenFor> show [me] the population of [the] {country} in {year} </ListenFor>
+      <Feedback> Showing population of {country} in {year} </Feedback>
+      <VoiceCommandService Target="VoiceCommandService"/>
+    </Command>
+
+    <PhraseList Label="country">
+      <Item>Ghana</Item>
+      <Item>Germany</Item>
+      <Item>Ireland</Item>
+      <Item>China</Item>
+    </PhraseList>
+
+    <PhraseList Label="year">
+      <Item>2020</Item>
+      <Item>2006</Item>
+      <Item>1994</Item>
+      <Item>1985</Item>
+    </PhraseList>
+  </CommandSet>
+
+</VoiceCommands>
