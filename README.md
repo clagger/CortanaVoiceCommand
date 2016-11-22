@@ -9,11 +9,14 @@ To start the application, start cortana and speak clear "Listen Up"
 Then you can ask two different questions:
 
 for the population of the past
+
 show me the population of [country] in [year]
 
 for the population in the future <b>(in progress)</b>
+
 what will be the population of [country] in [year]
 
 this project is based on a Windows-universal-samples project
+
 https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/CortanaVoiceCommand
 
