@@ -80,7 +80,7 @@ namespace WorldPopulation.VoiceCommands
                         case "showFuturePopulation":
                             var country = voiceCommand.Properties["country"][0];
                             var year = voiceCommand.Properties["year"][0];
-                            await SendCompletionMessageForFuturePopulation(country, year);
+                            await SendCompletionMessageForPopulation(country, year);
                             break;
                         default:
                             break;
@@ -94,7 +94,7 @@ namespace WorldPopulation.VoiceCommands
         }
 
         //Search for the requested data and give a response in cortana
-        private async Task SendCompletionMessageForFuturePopulation(string country, string year)
+        private async Task SendCompletionMessageForPopulation(string country, string year)
         {
             // If this operation is expected to take longer than 0.5 seconds, the task must
             // provide a progress response to Cortana prior to starting the operation, and
@@ -104,71 +104,12 @@ namespace WorldPopulation.VoiceCommands
                        country, year);
             await ShowProgressScreen(calculatingPrediction);
 
-            //call REST API from Azure Cloud which offers the needed data (Country and year are parameters)
-            //just a placeholder value for test purpose
+            //search type is the whole population
+            string searchType = "\"Population. total\"";
 
-            var population = "";
-
-            using (var client = new HttpClient())
-            {
-                string sqlParam = "select \"Country Name\", \"" + year + "\" from t1 where \"Country Name\" LIKE '" + country + "' AND \"Indicator Name\" LIKE \"Population. total\";";
-                var scoreRequest = new
-                {
-
-                    Inputs = new Dictionary<string, StringTable>() {
-                        {
-                            "input1",
-                            new StringTable()
-                            {
-                                ColumnNames = new string[] {"Country", "Year", "SearchType"},
-                                Values = new string[,] {  { "value", "0", "value" },  { "value", "0", "value" },  }
-                            }
-                        },
-                    },
-                    GlobalParameters = new Dictionary<string, string>() {
-                                     { "SQL Query Script",sqlParam},
-                                }
-                };
-                const string apiKey = "8KICXycSV+ngjQhhAcV07NL53ojtjV0QV6ppwCmYov3fR/il9GVuSz4CiDeRk2t+AGLUv9KmcYGrmxSCDoqGJA=="; // Replace this with the API key for the web service
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-                client.BaseAddress = new Uri("https://europewest.services.azureml.net/workspaces/bd19930a2188458ba118733fdec7d7b0/services/bac09f8efed048709984eb336df4647d/execute?api-version=2.0&details=true");
-
-                // WARNING: The 'await' statement below can result in a deadlock if you are calling this code from the UI thread of an ASP.Net application.
-                // One way to address this would be to call ConfigureAwait(false) so that the execution does not attempt to resume on the original context.
-                // For instance, replace code such as:
-                //      result = await DoSomeTask()
-                // with the following:
-                //      result = await DoSomeTask().ConfigureAwait(false)
-
-
-                HttpResponseMessage httpResponse = await client.PostAsJsonAsync("", scoreRequest);
-
-                if (httpResponse.IsSuccessStatusCode)
-                {
-                   
-                    string result = await httpResponse.Content.ReadAsStringAsync();
-                    JObject json = JObject.Parse(result);
-                    population = json["Results"]["output1"]["value"]["Values"][0][1].ToString();
-
-                 //   Debug.WriteLine(json["Results"]["output1"]["value"]["Values"][0][1].ToString());
-                 //  Debug.WriteLine("Result: {0}", result);
-                }
-                else
-                {
-                    Debug.WriteLine(string.Format("The request failed with status code: {0}", httpResponse.StatusCode));
-
-                    // Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-                    Debug.WriteLine(httpResponse.Headers.ToString());
-
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync();
-                    Debug.WriteLine(responseContent);
-                }
-            }
-
-            
-
-
+            //this var will be filled with the according response data from the following REST Call
+            var population = await InvokeRequestResponseService(country, year, searchType);
+          
             var userMessage = new VoiceCommandUserMessage();
             var responseContentTile = new VoiceCommandContentTile();
 
@@ -196,9 +137,71 @@ namespace WorldPopulation.VoiceCommands
             await voiceServiceConnection.ReportSuccessAsync(response);
         }
 
-        private async Task InvokeRequestResponseService(string country, string year)
+        // REST API call 
+        private  async Task<string> InvokeRequestResponseService(string country, string year, string searchType)
         {
-            
+            //call REST API from Azure Cloud which offers the needed data
+            //country and year are parameters for the SQLite Query
+            using (var client = new HttpClient())
+            {
+                //build the JSON payload
+                string sqlParam = "select \"Country Name\", \"" + year + "\" from t1 where \"Country Name\" LIKE '" + country + "' AND \"Indicator Name\" LIKE"+searchType+" ;";
+                var scoreRequest = new
+                {
+
+                    Inputs = new Dictionary<string, StringTable>() {
+                        {
+                            "input1",
+                            new StringTable()
+                            {
+                                ColumnNames = new string[] {"Country", "Year", "SearchType"},
+                                Values = new string[,] {  { "value", "0", "value" },  { "value", "0", "value" },  }
+                            }
+                        },
+                    },
+                    GlobalParameters = new Dictionary<string, string>() {
+                                     { "SQL Query Script",sqlParam},
+                                }
+                };
+
+                //API Key for the web service
+                const string apiKey = "8KICXycSV+ngjQhhAcV07NL53ojtjV0QV6ppwCmYov3fR/il9GVuSz4CiDeRk2t+AGLUv9KmcYGrmxSCDoqGJA==";
+
+                //add the key to the header
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+                client.BaseAddress = new Uri("https://europewest.services.azureml.net/workspaces/bd19930a2188458ba118733fdec7d7b0/services/bac09f8efed048709984eb336df4647d/execute?api-version=2.0&details=true");
+
+                // WARNING: The 'await' statement below can result in a deadlock if you are calling this code from the UI thread of an ASP.Net application.
+                // One way to address this would be to call ConfigureAwait(false) so that the execution does not attempt to resume on the original context.
+                // For instance, replace code such as:
+                //      result = await DoSomeTask()
+                // with the following:
+                //      result = await DoSomeTask().ConfigureAwait(false)
+
+
+                HttpResponseMessage httpResponse = await client.PostAsJsonAsync("", scoreRequest);
+                var returnValue = "";
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    //get the resultstring, parse it to an JObject,exctract the population from it and store it in population var
+                    string result = await httpResponse.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(result);
+                    returnValue = json["Results"]["output1"]["value"]["Values"][0][1].ToString();
+                    
+                }
+                else
+                {
+                    Debug.WriteLine(string.Format("The request failed with status code: {0}", httpResponse.StatusCode));
+
+                    // Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+                    Debug.WriteLine(httpResponse.Headers.ToString());
+
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync();
+                    Debug.WriteLine(responseContent);
+                }
+                return (returnValue);
+            }
         }
 
 
