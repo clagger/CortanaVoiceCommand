@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.ApplicationModel.VoiceCommands;
 using Windows.Storage;
-
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace WorldPopulation.VoiceCommands
 {
+
+    class StringTable
+    {
+        public string[] ColumnNames { get; set; }
+        public string[,] Values { get; set; }
+    }
     public sealed class VoiceCommandService : IBackgroundTask
     {
 
@@ -95,7 +106,68 @@ namespace WorldPopulation.VoiceCommands
 
             //call REST API from Azure Cloud which offers the needed data (Country and year are parameters)
             //just a placeholder value for test purpose
-            var population = "20121212.2";
+
+            var population = "";
+
+            using (var client = new HttpClient())
+            {
+                string sqlParam = "select \"Country Name\", \"" + year + "\" from t1 where \"Country Name\" LIKE '" + country + "' AND \"Indicator Name\" LIKE \"Population. total\";";
+                var scoreRequest = new
+                {
+
+                    Inputs = new Dictionary<string, StringTable>() {
+                        {
+                            "input1",
+                            new StringTable()
+                            {
+                                ColumnNames = new string[] {"Country", "Year", "SearchType"},
+                                Values = new string[,] {  { "value", "0", "value" },  { "value", "0", "value" },  }
+                            }
+                        },
+                    },
+                    GlobalParameters = new Dictionary<string, string>() {
+                                     { "SQL Query Script",sqlParam},
+                                }
+                };
+                const string apiKey = "8KICXycSV+ngjQhhAcV07NL53ojtjV0QV6ppwCmYov3fR/il9GVuSz4CiDeRk2t+AGLUv9KmcYGrmxSCDoqGJA=="; // Replace this with the API key for the web service
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+                client.BaseAddress = new Uri("https://europewest.services.azureml.net/workspaces/bd19930a2188458ba118733fdec7d7b0/services/bac09f8efed048709984eb336df4647d/execute?api-version=2.0&details=true");
+
+                // WARNING: The 'await' statement below can result in a deadlock if you are calling this code from the UI thread of an ASP.Net application.
+                // One way to address this would be to call ConfigureAwait(false) so that the execution does not attempt to resume on the original context.
+                // For instance, replace code such as:
+                //      result = await DoSomeTask()
+                // with the following:
+                //      result = await DoSomeTask().ConfigureAwait(false)
+
+
+                HttpResponseMessage httpResponse = await client.PostAsJsonAsync("", scoreRequest);
+
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                   
+                    string result = await httpResponse.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(result);
+                    population = json["Results"]["output1"]["value"]["Values"][0][1].ToString();
+
+                 //   Debug.WriteLine(json["Results"]["output1"]["value"]["Values"][0][1].ToString());
+                 //  Debug.WriteLine("Result: {0}", result);
+                }
+                else
+                {
+                    Debug.WriteLine(string.Format("The request failed with status code: {0}", httpResponse.StatusCode));
+
+                    // Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+                    Debug.WriteLine(httpResponse.Headers.ToString());
+
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync();
+                    Debug.WriteLine(responseContent);
+                }
+            }
+
+            
+
 
             var userMessage = new VoiceCommandUserMessage();
             var responseContentTile = new VoiceCommandContentTile();
@@ -114,7 +186,7 @@ namespace WorldPopulation.VoiceCommands
             tileList.Add(responseContentTile);
 
             // Set a message for the Response Cortana Page
-            string message = String.Format(cortanaResourceMap.GetValue("ShowFuturePopulation", cortanaContext).ValueAsString, country, year, population);
+            string message = String.Format(cortanaResourceMap.GetValue("ShowPopulation", cortanaContext).ValueAsString, country, year, population);
 
             userMessage.DisplayMessage = message;
             userMessage.SpokenMessage = message;
@@ -122,6 +194,11 @@ namespace WorldPopulation.VoiceCommands
             var response = VoiceCommandResponse.CreateResponse(userMessage, tileList);
 
             await voiceServiceConnection.ReportSuccessAsync(response);
+        }
+
+        private async Task InvokeRequestResponseService(string country, string year)
+        {
+            
         }
 
 

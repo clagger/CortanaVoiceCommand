@@ -12,17 +12,327 @@
     </Command>
 
     <PhraseList Label="country">
-      <Item>Ghana</Item>
-      <Item>Germany</Item>
-      <Item>Ireland</Item>
+      <Item>Afghanistan</Item>
+      <Item>Albania</Item>
+      <Item>Algeria</Item>
+      <Item>American Samoa</Item>
+      <Item>Andorra</Item>
+      <Item>Angola</Item>
+      <Item>Antigua and Barbuda</Item>
+      <Item>Arab World</Item>
+      <Item>Argentina</Item>
+      <Item>Armenia</Item>
+      <Item>Aruba</Item>
+      <Item>Australia</Item>
+      <Item>Austria</Item>
+      <Item>Azerbaijan</Item>
+      <Item>Bahamas</Item>
+      <Item>Bahrain</Item>
+      <Item>Bangladesh</Item>
+      <Item>Barbados</Item>
+      <Item>Belarus</Item>
+      <Item>Belgium</Item>
+      <Item>Belize</Item>
+      <Item>Benin</Item>
+      <Item>Bermuda</Item>
+      <Item>Bhutan</Item>
+      <Item>Bolivia</Item>
+      <Item>Bosnia and Herzegovina</Item>
+      <Item>Botswana</Item>
+      <Item>Brazil</Item>
+      <Item>British Virgin Islands</Item>
+      <Item>Brunei Darussalam</Item>
+      <Item>Bulgaria</Item>
+      <Item>Burkina Faso</Item>
+      <Item>Burundi</Item>
+      <Item>Cabo Verde</Item>
+      <Item>Cambodia</Item>
+      <Item>Cameroon</Item>
+      <Item>Canada</Item>
+      <Item>Caribbean small states</Item>
+      <Item>Cayman Islands</Item>
+      <Item>Central African Republic</Item>
+      <Item>Central Europe and the Baltics</Item>
+      <Item>Chad</Item>
+      <Item>Channel Islands</Item>
+      <Item>Chile</Item>
       <Item>China</Item>
+      <Item>Colombia</Item>
+      <Item>Comoros</Item>
+      <Item>Congo. Dem. Rep.</Item>
+      <Item>Congo. Rep.</Item>
+      <Item>Costa Rica</Item>
+      <Item>Cote d'Ivoire</Item>
+      <Item>Croatia</Item>
+      <Item>Cuba</Item>
+      <Item>Curacao</Item>
+      <Item>Cyprus</Item>
+      <Item>Czech Republic</Item>
+      <Item>Denmark</Item>
+      <Item>Djibouti</Item>
+      <Item>Dominica</Item>
+      <Item>Dominican Republic</Item>
+      <Item>Early-demographic dividend</Item>
+      <Item>East Asia and Pacific</Item>
+      <Item>East Asia and Pacific (IDA and IBRD countries)</Item>
+      <Item>East Asia and Pacific (excluding high income)</Item>
+      <Item>Ecuador</Item>
+      <Item>Egypt. Arab Rep.</Item>
+      <Item>El Salvador</Item>
+      <Item>Equatorial Guinea</Item>
+      <Item>Eritrea</Item>
+      <Item>Estonia</Item>
+      <Item>Ethiopia</Item>
+      <Item>Euro area</Item>
+      <Item>Europe and Central Asia</Item>
+      <Item>Europe and Central Asia (IDA and IBRD countries)</Item>
+      <Item>Europe and Central Asia (excluding high income)</Item>
+      <Item>European Union</Item>
+      <Item>Faroe Islands</Item>
+      <Item>Fiji</Item>
+      <Item>Finland</Item>
+      <Item>Fragile and conflict affected situations</Item>
+      <Item>France</Item>
+      <Item>French Polynesia</Item>
+      <Item>Gabon</Item>
+      <Item>Gambia. The</Item>
+      <Item>Georgia</Item>
+      <Item>Germany</Item>
+      <Item>Ghana</Item>
+      <Item>Gibraltar</Item>
+      <Item>Greece</Item>
+      <Item>Greenland</Item>
+      <Item>Grenada</Item>
+      <Item>Guam</Item>
+      <Item>Guatemala</Item>
+      <Item>Guinea</Item>
+      <Item>Guinea-Bissau</Item>
+      <Item>Guyana</Item>
+      <Item>Haiti</Item>
+      <Item>Heavily indebted poor countries (HIPC)</Item>
+      <Item>High income</Item>
+      <Item>Honduras</Item>
+      <Item>Hong Kong SAR. China</Item>
+      <Item>Hungary</Item>
+      <Item>IBRD only</Item>
+      <Item>IDA and IBRD total</Item>
+      <Item>IDA blend</Item>
+      <Item>IDA only</Item>
+      <Item>IDA total</Item>
+      <Item>Iceland</Item>
+      <Item>India</Item>
+      <Item>Indonesia</Item>
+      <Item>Iran. Islamic Rep.</Item>
+      <Item>Iraq</Item>
+      <Item>Ireland</Item>
+      <Item>Isle of Man</Item>
+      <Item>Israel</Item>
+      <Item>Italy</Item>
+      <Item>Jamaica</Item>
+      <Item>Japan</Item>
+      <Item>Jordan</Item>
+      <Item>Kazakhstan</Item>
+      <Item>Kenya</Item>
+      <Item>Kiribati</Item>
+      <Item>Korea</Item>
+      <Item>Korea. Rep.</Item>
+      <Item>Kosovo</Item>
+      <Item>Kuwait</Item>
+      <Item>Kyrgyz Republic</Item>
+      <Item>Lao PDR</Item>
+      <Item>Latvia</Item>
+      <Item>Least developed countries: UN classification</Item>
+      <Item>Lebanon</Item>
+      <Item>Lesotho</Item>
+      <Item>Liberia</Item>
+      <Item>Libya</Item>
+      <Item>Liechtenstein</Item>
+      <Item>Lithuania</Item>
+      <Item>Low and middle income</Item>
+      <Item>Low income</Item>
+      <Item>Lower middle income</Item>
+      <Item>Luxembourg</Item>
+      <Item>Macao SAR. China</Item>
+      <Item>Macedonia. FYR</Item>
+      <Item>Madagascar</Item>
+      <Item>Malawi</Item>
+      <Item>Malaysia</Item>
+      <Item>Maldives</Item>
+      <Item>Mali</Item>
+      <Item>Malta</Item>
+      <Item>Marshall Islands</Item>
+      <Item>Mauritania</Item>
+      <Item>Mauritius</Item>
+      <Item>Mexico</Item>
+      <Item>Micronesia. Fed. Sts.</Item>
+      <Item>Middle East and North Africa</Item>
+      <Item>Middle East and North Africa (IDA and IBRD countries)</Item>
+      <Item>Middle East and North Africa (excluding high income)</Item>
+      <Item>Middle income</Item>
+      <Item>Moldova</Item>
+      <Item>Monaco</Item>
+      <Item>Mongolia</Item>
+      <Item>Montenegro</Item>
+      <Item>Morocco</Item>
+      <Item>Mozambique</Item>
+      <Item>Myanmar</Item>
+      <Item>Namibia</Item>
+      <Item>Nauru</Item>
+      <Item>Nepal</Item>
+      <Item>Netherlands</Item>
+      <Item>New Caledonia</Item>
+      <Item>New Zealand</Item>
+      <Item>Nicaragua</Item>
+      <Item>Niger</Item>
+      <Item>Nigeria</Item>
+      <Item>North America</Item>
+      <Item>Northern Mariana Islands</Item>
+      <Item>Norway</Item>
+      <Item>Not classified</Item>
+      <Item>OECD members</Item>
+      <Item>Oman</Item>
+      <Item>Other small states</Item>
+      <Item>Pacific island small states</Item>
+      <Item>Pakistan</Item>
+      <Item>Palau</Item>
+      <Item>Panama</Item>
+      <Item>Papua New Guinea</Item>
+      <Item>Paraguay</Item>
+      <Item>Peru</Item>
+      <Item>Philippines</Item>
+      <Item>Poland</Item>
+      <Item>Portugal</Item>
+      <Item>Post-demographic dividend</Item>
+      <Item>Pre-demographic dividend</Item>
+      <Item>Puerto Rico</Item>
+      <Item>Qatar</Item>
+      <Item>Romania</Item>
+      <Item>Russian Federation</Item>
+      <Item>Rwanda</Item>
+      <Item>Samoa</Item>
+      <Item>San Marino</Item>
+      <Item>Sao Tome and Principe</Item>
+      <Item>Saudi Arabia</Item>
+      <Item>Senegal</Item>
+      <Item>Serbia</Item>
+      <Item>Seychelles</Item>
+      <Item>Sierra Leone</Item>
+      <Item>Singapore</Item>
+      <Item>Sint Maarten (Dutch part)</Item>
+      <Item>Slovak Republic</Item>
+      <Item>Slovenia</Item>
+      <Item>Small states</Item>
+      <Item>Solomon Islands</Item>
+      <Item>Somalia</Item>
+      <Item>South Africa</Item>
+      <Item>South Asia</Item>
+      <Item>South Asia (IDA and IBRD)</Item>
+      <Item>South Sudan</Item>
+      <Item>Spain</Item>
+      <Item>Sri Lanka</Item>
+      <Item>St. Kitts and Nevis</Item>
+      <Item>St. Lucia</Item>
+      <Item>St. Martin (French part)</Item>
+      <Item>St. Vincent and the Grenadines</Item>
+      <Item>Sub-Saharan Africa</Item>
+      <Item>Sub-Saharan Africa (IDA and IBRD countries)</Item>
+      <Item>Sub-Saharan Africa (excluding high income)</Item>
+      <Item>Sudan</Item>
+      <Item>Suriname</Item>
+      <Item>Swaziland</Item>
+      <Item>Sweden</Item>
+      <Item>Switzerland</Item>
+      <Item>Syrian Arab Republic</Item>
+      <Item>Tajikistan</Item>
+      <Item>Tanzania</Item>
+      <Item>Thailand</Item>
+      <Item>Timor-Leste</Item>
+      <Item>Togo</Item>
+      <Item>Tonga</Item>
+      <Item>Trinidad and Tobago</Item>
+      <Item>Tunisia</Item>
+      <Item>Turkey</Item>
+      <Item>Turkmenistan</Item>
+      <Item>Turks and Caicos Islands</Item>
+      <Item>Tuvalu</Item>
+      <Item>Uganda</Item>
+      <Item>Ukraine</Item>
+      <Item>United Arab Emirates</Item>
+      <Item>United Kingdom</Item>
+      <Item>United States</Item>
+      <Item>Upper middle income</Item>
+      <Item>Uruguay</Item>
+      <Item>Uzbekistan</Item>
+      <Item>Vanuatu</Item>
+      <Item>Venezuela. RB</Item>
+      <Item>Vietnam</Item>
+      <Item>Virgin Islands (U.S.)</Item>
+      <Item>West Bank and Gaza</Item>
+      <Item>World</Item>
+      <Item>Yemen. Rep.</Item>
+      <Item>Zambia</Item>
+      <Item>Zimbabwe</Item>
+
+    
     </PhraseList>
 
     <PhraseList Label="year">
-      <Item>2020</Item>
-      <Item>2006</Item>
-      <Item>1994</Item>
+      <Item>1960</Item>
+      <Item>1961</Item>
+      <Item>1962</Item>
+      <Item>1963</Item>
+      <Item>1964</Item>
+      <Item>1965</Item>
+      <Item>1966</Item>
+      <Item>1967</Item>
+      <Item>1968</Item>
+      <Item>1969</Item>
+      <Item>1970</Item>
+      <Item>1971</Item>
+      <Item>1972</Item>
+      <Item>1973</Item>
+      <Item>1974</Item>
+      <Item>1975</Item>
+      <Item>1976</Item>
+      <Item>1977</Item>
+      <Item>1978</Item>
+      <Item>1979</Item>
+      <Item>1980</Item>
+      <Item>1981</Item>
+      <Item>1982</Item>
+      <Item>1983</Item>
+      <Item>1984</Item>
       <Item>1985</Item>
+      <Item>1986</Item>
+      <Item>1987</Item>
+      <Item>1988</Item>
+      <Item>1989</Item>
+      <Item>1990</Item>
+      <Item>1991</Item>
+      <Item>1992</Item>
+      <Item>1993</Item>
+      <Item>1994</Item>
+      <Item>1995</Item>
+      <Item>1996</Item>
+      <Item>1997</Item>
+      <Item>1998</Item>
+      <Item>1999</Item>
+      <Item>2000</Item>
+      <Item>2001</Item>
+      <Item>2002</Item>
+      <Item>2003</Item>
+      <Item>2004</Item>
+      <Item>2005</Item>
+      <Item>2006</Item>
+      <Item>2007</Item>
+      <Item>2008</Item>
+      <Item>2009</Item>
+      <Item>2010</Item>
+      <Item>2011</Item>
+      <Item>2012</Item>
+      <Item>2013</Item>
+      <Item>2014</Item>
+      <Item>2015</Item>
     </PhraseList>
   </CommandSet>
 
