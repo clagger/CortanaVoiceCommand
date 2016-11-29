@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CalculatingPrediction" xml:space="preserve">
+  <data name="CalculatingPopulation" xml:space="preserve">
     <value>Calculating the population of {0} in {1}</value>
+  </data>
+  <data name="CalculatingWomenProportion" xml:space="preserve">
+    <value>Calculating the women proportion of {0} in {1}</value>
   </data>
   <data name="ShowFuturePopulation" xml:space="preserve">
     <value>The population in {0} in the year {1} will be about {2} according to our calculations</value>
   </data>
   <data name="ShowPopulation" xml:space="preserve">
     <value>The population in {0} in the year {1} was about {2} according to our data</value>
+  </data>
+  <data name="ShowWomenProportion" xml:space="preserve">
+    <value>The women proportion in {0} in the year {1} was about {2} according to our data</value>
   </data>
 </root>

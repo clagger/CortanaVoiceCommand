@@ -4,10 +4,18 @@
     <CommandPrefix> Listen up </CommandPrefix>
     <Example> show me the population of ghana in 2006 </Example>
 
-    <Command Name="showFuturePopulation">
+    <Command Name="showPastPopulation">
       <Example>  show me the population of ghana in 2006 </Example>
       <ListenFor> show [me] the population of [the] {country} in {year} </ListenFor>
+      <ListenFor> how big was the population in {country} in {year} </ListenFor>
       <Feedback> Showing population of {country} in {year} </Feedback>
+      <VoiceCommandService Target="VoiceCommandService"/>
+    </Command>
+
+    <Command Name="showPastWomenPercentage">
+      <Example>How high was the proportion of women in Afghanistan in 2009?</Example>
+      <ListenFor>how high was the proportion of women in {country} in {year}</ListenFor>
+      <Feedback> Showing the proportion of women in {country} in {year} </Feedback>
       <VoiceCommandService Target="VoiceCommandService"/>
     </Command>
 

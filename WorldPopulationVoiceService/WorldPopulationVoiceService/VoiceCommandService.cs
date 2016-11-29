@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace WorldPopulation.VoiceCommands
 {
@@ -75,12 +76,22 @@ namespace WorldPopulation.VoiceCommands
 
                     // Depending on the operation (defined in AdventureWorks:AdventureWorksCommands.xml)
                     // perform the appropriate command.
+                    
                     switch (voiceCommand.CommandName)
                     {
-                        case "showFuturePopulation":
-                            var country = voiceCommand.Properties["country"][0];
-                            var year = voiceCommand.Properties["year"][0];
-                            await SendCompletionMessageForPopulation(country, year);
+                        case "showPastPopulation":
+                             var pastCountry = voiceCommand.Properties["country"][0];
+                             var pastYear = voiceCommand.Properties["year"][0];
+                            //search type is the whole population
+                            string pastSearchType = "\"Population. total\"";
+                            await SendCompletionMessageForPastPopulation(pastCountry, pastYear, pastSearchType);
+                            break;
+                        case "showPastWomenPercentage":
+                            var pastWomenCountry = voiceCommand.Properties["country"][0];
+                            var pastWomenYear = voiceCommand.Properties["year"][0];
+                            //search type is the whole population
+                            string womenSearchType = "\"Population. female (% of total)\"";
+                            await SendCompletionMessageForPastWomenProportion(pastWomenCountry, pastWomenYear, womenSearchType);
                             break;
                         default:
                             break;
@@ -94,22 +105,20 @@ namespace WorldPopulation.VoiceCommands
         }
 
         //Search for the requested data and give a response in cortana
-        private async Task SendCompletionMessageForPopulation(string country, string year)
+        private async Task SendCompletionMessageForPastPopulation(string country, string year, string searchType)
         {
             // If this operation is expected to take longer than 0.5 seconds, the task must
             // provide a progress response to Cortana prior to starting the operation, and
             // provide updates at most every 5 seconds.
-            string calculatingPrediction = string.Format(
-                       cortanaResourceMap.GetValue("CalculatingPrediction", cortanaContext).ValueAsString,
+            string calculatingPopulation = string.Format(
+                       cortanaResourceMap.GetValue("CalculatingPopulation", cortanaContext).ValueAsString,
                        country, year);
-            await ShowProgressScreen(calculatingPrediction);
-
-            //search type is the whole population
-            string searchType = "\"Population. total\"";
+            await ShowProgressScreen(calculatingPopulation);
 
             //this var will be filled with the according response data from the following REST Call
-            var population = await InvokeRequestResponseService(country, year, searchType);
-          
+            var result = await InvokeRequestResponseService(country, year, searchType);
+            string population = Convert.ToDouble(result).ToString("#,##,, Million", CultureInfo.InvariantCulture);
+
             var userMessage = new VoiceCommandUserMessage();
             var responseContentTile = new VoiceCommandContentTile();
 
@@ -120,7 +129,7 @@ namespace WorldPopulation.VoiceCommands
             responseContentTile.AppLaunchArgument = country;
             responseContentTile.Title = country + " " + year;
 
-            responseContentTile.TextLine1 = "Population: " + population;
+            responseContentTile.TextLine1 = "Population: " + result + "Million";
 
             //the VoiceCommandResponse needs to be a list
             var tileList = new List<VoiceCommandContentTile>();
@@ -128,6 +137,48 @@ namespace WorldPopulation.VoiceCommands
 
             // Set a message for the Response Cortana Page
             string message = String.Format(cortanaResourceMap.GetValue("ShowPopulation", cortanaContext).ValueAsString, country, year, population);
+
+            userMessage.DisplayMessage = message;
+            userMessage.SpokenMessage = message;
+
+            var response = VoiceCommandResponse.CreateResponse(userMessage, tileList);
+
+            await voiceServiceConnection.ReportSuccessAsync(response);
+        }
+
+        //Search for the requested data and give a response in cortana
+        private async Task SendCompletionMessageForPastWomenProportion(string country, string year, string searchType)
+        {
+            // If this operation is expected to take longer than 0.5 seconds, the task must
+            // provide a progress response to Cortana prior to starting the operation, and
+            // provide updates at most every 5 seconds.
+            string calculatingWomenProportion = string.Format(
+                       cortanaResourceMap.GetValue("CalculatingWomenProportion", cortanaContext).ValueAsString,
+                       country, year);
+            await ShowProgressScreen(calculatingWomenProportion);
+
+            //this var will be filled with the according response data from the following REST Call
+            var result = await InvokeRequestResponseService(country, year, searchType);
+            string womenProportion = Convert.ToDouble(result).ToString("#.##")+"%";
+
+            var userMessage = new VoiceCommandUserMessage();
+            var responseContentTile = new VoiceCommandContentTile();
+
+            //set the type of the ContentTyle
+            responseContentTile.ContentTileType = VoiceCommandContentTileType.TitleWithText;
+
+            //fill the responseContentTile with the data we got
+            responseContentTile.AppLaunchArgument = country;
+            responseContentTile.Title = country + " " + year;
+
+            responseContentTile.TextLine1 = "Women proportion: " + womenProportion;
+
+            //the VoiceCommandResponse needs to be a list
+            var tileList = new List<VoiceCommandContentTile>();
+            tileList.Add(responseContentTile);
+
+            // Set a message for the Response Cortana Page
+            string message = String.Format(cortanaResourceMap.GetValue("ShowWomenProportion", cortanaContext).ValueAsString, country, year, womenProportion);
 
             userMessage.DisplayMessage = message;
             userMessage.SpokenMessage = message;
