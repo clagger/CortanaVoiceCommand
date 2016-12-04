@@ -19,6 +19,14 @@
       <VoiceCommandService Target="VoiceCommandService"/>
     </Command>
 
+    <Command Name="showFuturePopulation">
+      <Example> How high will the population of Afghanistan be in 2020? </Example>
+      <ListenFor>How high will the population of {country} be in {year}</ListenFor>
+      <ListenFor>How big will the population of {country} be in {year}</ListenFor>
+      <Feedback> Showing the population of {country} in {year} </Feedback>
+      <VoiceCommandService Target="VoiceCommandService"/>
+    </Command>
+
     <PhraseList Label="country">
       <Item>Afghanistan</Item>
       <Item>Albania</Item>
@@ -341,6 +349,91 @@
       <Item>2013</Item>
       <Item>2014</Item>
       <Item>2015</Item>
+      <Item>2016</Item>
+      <Item>2017</Item>
+      <Item>2018</Item>
+      <Item>2019</Item>
+      <Item>2020</Item>
+      <Item>2021</Item>
+      <Item>2022</Item>
+      <Item>2023</Item>
+      <Item>2024</Item>
+      <Item>2025</Item>
+      <Item>2026</Item>
+      <Item>2027</Item>
+      <Item>2028</Item>
+      <Item>2029</Item>
+      <Item>2030</Item>
+      <Item>2031</Item>
+      <Item>2032</Item>
+      <Item>2033</Item>
+      <Item>2034</Item>
+      <Item>2035</Item>
+      <Item>2036</Item>
+      <Item>2037</Item>
+      <Item>2038</Item>
+      <Item>2039</Item>
+      <Item>2040</Item>
+      <Item>2041</Item>
+      <Item>2042</Item>
+      <Item>2043</Item>
+      <Item>2044</Item>
+      <Item>2045</Item>
+      <Item>2046</Item>
+      <Item>2047</Item>
+      <Item>2048</Item>
+      <Item>2049</Item>
+      <Item>2050</Item>
+      <Item>2051</Item>
+      <Item>2052</Item>
+      <Item>2053</Item>
+      <Item>2054</Item>
+      <Item>2055</Item>
+      <Item>2056</Item>
+      <Item>2057</Item>
+      <Item>2058</Item>
+      <Item>2059</Item>
+      <Item>2060</Item>
+      <Item>2061</Item>
+      <Item>2062</Item>
+      <Item>2063</Item>
+      <Item>2064</Item>
+      <Item>2065</Item>
+      <Item>2066</Item>
+      <Item>2067</Item>
+      <Item>2068</Item>
+      <Item>2069</Item>
+      <Item>2070</Item>
+      <Item>2071</Item>
+      <Item>2072</Item>
+      <Item>2073</Item>
+      <Item>2074</Item>
+      <Item>2075</Item>
+      <Item>2076</Item>
+      <Item>2077</Item>
+      <Item>2078</Item>
+      <Item>2079</Item>
+      <Item>2080</Item>
+      <Item>2081</Item>
+      <Item>2082</Item>
+      <Item>2083</Item>
+      <Item>2084</Item>
+      <Item>2085</Item>
+      <Item>2086</Item>
+      <Item>2087</Item>
+      <Item>2088</Item>
+      <Item>2089</Item>
+      <Item>2090</Item>
+      <Item>2091</Item>
+      <Item>2092</Item>
+      <Item>2093</Item>
+      <Item>2094</Item>
+      <Item>2095</Item>
+      <Item>2096</Item>
+      <Item>2097</Item>
+      <Item>2098</Item>
+      <Item>2099</Item>
+      <Item>2100</Item>
     </PhraseList>
   </CommandSet>
 
