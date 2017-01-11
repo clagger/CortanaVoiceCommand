@@ -128,7 +128,6 @@ namespace WorldPopulation.VoiceCommands
 
             var userMessage = new VoiceCommandUserMessage();
             var responseContentTile = new VoiceCommandContentTile();
-            var generalTile = new VoiceCommandContentTile();
 
             //set the type of the ContentTyle
             responseContentTile.ContentTileType = VoiceCommandContentTileType.TitleWithText;
@@ -142,7 +141,6 @@ namespace WorldPopulation.VoiceCommands
             //the VoiceCommandResponse needs to be a list
             var tileList = new List<VoiceCommandContentTile>();
             tileList.Add(responseContentTile);
-            tileList.Add(generalTile);
 
             // Set a message for the Response Cortana Page
             string message = String.Format(cortanaResourceMap.GetValue("ShowPopulation", cortanaContext).ValueAsString, country, year, population);
@@ -151,14 +149,15 @@ namespace WorldPopulation.VoiceCommands
             userMessage.SpokenMessage = message;
 
             var response = VoiceCommandResponse.CreateResponse(userMessage, tileList);
-            
+
             //general infos
-            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/dashboards/1e13afdf-70f8-4d7c-b4f5-c95499802d44"));
+            await Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/dashboards/1e13afdf-70f8-4d7c-b4f5-c95499802d44"));
 
             //country info
-            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/reports/6ae73462-1d4b-4bb7-928f-75d23fc6bc84/ReportSection?filter=World/Country eq '"+country+"'"));
+            await Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/reports/6ae73462-1d4b-4bb7-928f-75d23fc6bc84/ReportSection?filter=World/Country eq '" + country + "'"));
 
             await voiceServiceConnection.ReportSuccessAsync(response);
+            
         }
 
         //Search for the requested data (women proportion) and give a response in cortana
