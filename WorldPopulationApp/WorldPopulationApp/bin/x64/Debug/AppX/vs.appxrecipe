@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-01-16T10:56:44.178</Modified>
+      <Modified>2017-01-16T11:40:43.981</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\bin\x64\Debug\WorldPopulationApp.exe">
       <PackagePath>entrypoint\WorldPopulationApp.exe</PackagePath>
-      <Modified>2017-01-16T10:56:36.617</Modified>
+      <Modified>2017-01-16T11:40:38.028</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -472,7 +472,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationVoiceService\WorldPopulationVoiceService\bin\x64\Debug\WorldPopulation.VoiceCommands.winmd">
       <PackagePath>WorldPopulation.VoiceCommands.winmd</PackagePath>
-      <Modified>2017-01-16T10:56:33.892</Modified>
+      <Modified>2017-01-16T11:40:35.734</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
@@ -480,7 +480,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\VoiceCommands.xml">
       <PackagePath>VoiceCommands.xml</PackagePath>
-      <Modified>2017-01-16T10:45:45.486</Modified>
+      <Modified>2017-01-16T11:34:27.167</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
@@ -530,11 +530,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2017-01-16T10:56:37.489</Modified>
+      <Modified>2017-01-16T11:40:39.384</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\bin\x64\Debug\Core\WorldPopulationApp.exe">
       <PackagePath>WorldPopulationApp.exe</PackagePath>
-      <Modified>2017-01-16T10:56:44.164</Modified>
+      <Modified>2017-01-16T11:40:43.973</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

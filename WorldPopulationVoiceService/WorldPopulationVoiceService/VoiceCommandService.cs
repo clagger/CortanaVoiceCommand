@@ -236,7 +236,7 @@ namespace WorldPopulation.VoiceCommands
             responseContentTile.AppLaunchArgument = country;
             responseContentTile.Title = country + " " + year;
 
-            responseContentTile.TextLine1 = "Population :" + result;
+            responseContentTile.TextLine1 = "Population: " + result;
 
             //the VoiceCommandResponse needs to be a list
             var tileList = new List<VoiceCommandContentTile>();
@@ -268,7 +268,7 @@ namespace WorldPopulation.VoiceCommands
             // provide updates at most every 5 seconds.
             string calculatingFuturePopulation = string.Format(
                        cortanaResourceMap.GetValue("CalculatingPopulation", cortanaContext).ValueAsString,
-                       "Algeria", year);
+                       "Germany", year);
             await ShowProgressScreen(calculatingFuturePopulation);
 
             //this var will be filled with the according response data from the following REST Call
@@ -282,17 +282,17 @@ namespace WorldPopulation.VoiceCommands
             responseContentTile.ContentTileType = VoiceCommandContentTileType.TitleWithText;
 
             //fill the responseContentTile with the data we got
-            responseContentTile.AppLaunchArgument = "Algeria";
-            responseContentTile.Title = "Algeria" + " " + year;
+            responseContentTile.AppLaunchArgument = "Germany";
+            responseContentTile.Title = "Germany" + " " + year;
 
-            responseContentTile.TextLine1 = "Population :" + result;
+            responseContentTile.TextLine1 = "Population: " + Math.Round(Convert.ToDouble(result),2).ToString();
 
             //the VoiceCommandResponse needs to be a list
             var tileList = new List<VoiceCommandContentTile>();
             tileList.Add(responseContentTile);
 
             // Set a message for the Response Cortana Page
-            string message = String.Format(cortanaResourceMap.GetValue("ShowFuturePopulation", cortanaContext).ValueAsString, "Algeria", year, population);
+            string message = String.Format(cortanaResourceMap.GetValue("ShowFuturePopulation", cortanaContext).ValueAsString, "Germany", year, population);
 
             userMessage.DisplayMessage = message;
             userMessage.SpokenMessage = message;
@@ -303,7 +303,7 @@ namespace WorldPopulation.VoiceCommands
             await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/dashboards/1e13afdf-70f8-4d7c-b4f5-c95499802d44"));
 
             //country info
-            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/reports/6ae73462-1d4b-4bb7-928f-75d23fc6bc84/ReportSection?filter=World/Country eq '" + "Algeria" + "'"));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/reports/6ae73462-1d4b-4bb7-928f-75d23fc6bc84/ReportSection?filter=World/Country eq '" + "Germany" + "'"));
 
 
             await voiceServiceConnection.ReportSuccessAsync(response);
@@ -456,7 +456,7 @@ namespace WorldPopulation.VoiceCommands
                             "input1",
                             new StringTable()
                             {
-                                ColumnNames = new string[] {"Column 0", "Algeria Population total"},
+                                ColumnNames = new string[] {"Column 0", "Germany Population total"},
                                 Values = new string[,] {  { year, "0" },  { "0", "0" },  }
                             }
                         },

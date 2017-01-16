@@ -28,9 +28,9 @@
     </Command>
     
     <Command Name="showFuturePopulationML">
-      <Example>  Calculate the population of Algeria in 2018? </Example>
-      <ListenFor>Calculate the population of Algeria in {year}</ListenFor>
-      <Feedback> Showing the population of Algeria in {year} </Feedback>
+      <Example>  Calculate the population of Germany in 2018? </Example>
+      <ListenFor>Calculate the population of Germany in {year}</ListenFor>
+      <Feedback> Showing the population of Germany in {year} </Feedback>
       <VoiceCommandService Target="VoiceCommandService"/>
     </Command>
 
