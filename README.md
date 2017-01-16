@@ -13,10 +13,14 @@ the future population.
 Then you can ask three different queries:
 
 #### Query past population of countries
-
 Example: Listen up, show me the population of Afghanistan in 1997
 ```sh
 show me the population of [country] in [year]
+```
+#### Query future population (calculated with ML pattern matching)
+Example: Listen up, calculate the population of Germany in 2009?
+```sh
+calculate the population of Germany in [year]
 ```
 #### Query future population of countries
 Example: Listen up, how high will the population of Afghanistan be in 2020?
@@ -33,6 +37,7 @@ Example: Listen up, how high was the proportion of women in Afghanistan in 2009?
 ```sh
 how high was the proportion of women in [country]  in [year]
 ```
+
 
 <b>this project is based on a Windows-universal-samples project</b>
 
