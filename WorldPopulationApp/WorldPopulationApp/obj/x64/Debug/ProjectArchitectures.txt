@@ -1,2 +1,2 @@
-C:\Users\Christian\Desktop\WorldPopulation\WorldPopulationApp\WorldPopulationApp\WorldPopulationApp.csproj;x64
-C:\Users\Christian\Desktop\WorldPopulation\WorldPopulationVoiceService\WorldPopulationVoiceService\WorldPopulationVoiceService.csproj;x64
+C:\Users\chris\Desktop\Worlp\WorldPopulationApp\WorldPopulationApp\WorldPopulationApp.csproj;x64
+C:\Users\chris\Desktop\Worlp\WorldPopulationVoiceService\WorldPopulationVoiceService\WorldPopulationVoiceService.csproj;x64

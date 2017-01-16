@@ -26,6 +26,13 @@
       <Feedback> Showing the population of {country} in {year} </Feedback>
       <VoiceCommandService Target="VoiceCommandService"/>
     </Command>
+    
+    <Command Name="showFuturePopulationML">
+      <Example>  Calculate the population of Algeria in 2018? </Example>
+      <ListenFor>Calculate the population of Algeria in {year}</ListenFor>
+      <Feedback> Showing the population of Algeria in {year} </Feedback>
+      <VoiceCommandService Target="VoiceCommandService"/>
+    </Command>
 
     <PhraseList Label="country">
       <Item>Afghanistan</Item>

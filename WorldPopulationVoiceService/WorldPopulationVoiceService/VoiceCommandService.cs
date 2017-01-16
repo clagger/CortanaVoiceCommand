@@ -97,8 +97,11 @@ namespace WorldPopulation.VoiceCommands
                         case "showFuturePopulation":
                             var futureCountry = voiceCommand.Properties["country"][0];
                             var futureYear = voiceCommand.Properties["year"][0];
-                               
                             await SendCompletionMessageForFuturePopulation(futureCountry, futureYear);
+                            break;
+                        case "showFuturePopulationML":
+                            var futureYearML = voiceCommand.Properties["year"][0];
+                            await SendCompletionMessageForFuturePopulationML(futureYearML);
                             break;
                         default:
                             break;
@@ -257,6 +260,55 @@ namespace WorldPopulation.VoiceCommands
             await voiceServiceConnection.ReportSuccessAsync(response);
         }
 
+        //Search for the requested data (future population) and give a response in cortana
+        private async Task SendCompletionMessageForFuturePopulationML(string year)
+        {
+            // If this operation is expected to take longer than 0.5 seconds, the task must
+            // provide a progress response to Cortana prior to starting the operation, and
+            // provide updates at most every 5 seconds.
+            string calculatingFuturePopulation = string.Format(
+                       cortanaResourceMap.GetValue("CalculatingPopulation", cortanaContext).ValueAsString,
+                       "Algeria", year);
+            await ShowProgressScreen(calculatingFuturePopulation);
+
+            //this var will be filled with the according response data from the following REST Call
+            var result = await InvokeRequestResponseServicePredictiveML(year);
+            string population = Convert.ToDouble(result).ToString("#,##,, Million", CultureInfo.InvariantCulture);
+
+            var userMessage = new VoiceCommandUserMessage();
+            var responseContentTile = new VoiceCommandContentTile();
+
+            //set the type of the ContentTyle
+            responseContentTile.ContentTileType = VoiceCommandContentTileType.TitleWithText;
+
+            //fill the responseContentTile with the data we got
+            responseContentTile.AppLaunchArgument = "Algeria";
+            responseContentTile.Title = "Algeria" + " " + year;
+
+            responseContentTile.TextLine1 = "Population :" + result;
+
+            //the VoiceCommandResponse needs to be a list
+            var tileList = new List<VoiceCommandContentTile>();
+            tileList.Add(responseContentTile);
+
+            // Set a message for the Response Cortana Page
+            string message = String.Format(cortanaResourceMap.GetValue("ShowFuturePopulation", cortanaContext).ValueAsString, "Algeria", year, population);
+
+            userMessage.DisplayMessage = message;
+            userMessage.SpokenMessage = message;
+
+            var response = VoiceCommandResponse.CreateResponse(userMessage, tileList);
+
+            //general infos
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/dashboards/1e13afdf-70f8-4d7c-b4f5-c95499802d44"));
+
+            //country info
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(@"https://app.powerbi.com/groups/me/reports/6ae73462-1d4b-4bb7-928f-75d23fc6bc84/ReportSection?filter=World/Country eq '" + "Algeria" + "'"));
+
+
+            await voiceServiceConnection.ReportSuccessAsync(response);
+        }
+
         // REST API call 
         private  async Task<string> InvokeRequestResponseService(string country, string year, string searchType)
         {
@@ -390,6 +442,68 @@ namespace WorldPopulation.VoiceCommands
             }
         }
 
+        private async Task<string> InvokeRequestResponseServicePredictiveML(string year)
+        {
+            //call REST API from Azure Cloud which offers the needed data
+            //country and year are parameters for the SQLite Query
+            using (var client = new HttpClient())
+            {
+                var scoreRequest = new
+                {
+
+                    Inputs = new Dictionary<string, StringTable>() {
+                        {
+                            "input1",
+                            new StringTable()
+                            {
+                                ColumnNames = new string[] {"Column 0", "Algeria Population total"},
+                                Values = new string[,] {  { year, "0" },  { "0", "0" },  }
+                            }
+                        },
+                    },
+                    GlobalParameters = new Dictionary<string, string>() {
+        { "Data", "" },
+}
+                };
+                //API Key for the web service
+                const string apiKey = "3WPcGhCWSmV3KpueJYp7zFfHK7GCnUGqTBRVBy0Lyc3gfhIkrMgunhnaaK3VFfwXAU6x5uVtLnpJrki3oPCO3Q==";
+
+                //add the key to the header
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+                client.BaseAddress = new Uri("https://ussouthcentral.services.azureml.net/workspaces/54f97b09718944f59e75a0de95c47ff6/services/0ab6460461a347ee8aa4c1a3546c5500/execute?api-version=2.0&details=true");
+
+                // WARNING: The 'await' statement below can result in a deadlock if you are calling this code from the UI thread of an ASP.Net application.
+                // One way to address this would be to call ConfigureAwait(false) so that the execution does not attempt to resume on the original context.
+                // For instance, replace code such as:
+                //      result = await DoSomeTask()
+                // with the following:
+                //      result = await DoSomeTask().ConfigureAwait(false)
+
+
+                HttpResponseMessage httpResponse = await client.PostAsJsonAsync("", scoreRequest);
+                var returnValue = "";
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    //get the resultstring, parse it to an JObject,exctract the population from it and store it in population var
+                    string result = await httpResponse.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(result);
+                    returnValue = json["Results"]["output1"]["value"]["Values"][0][0].ToString();
+
+                }
+                else
+                {
+                    Debug.WriteLine(string.Format("The request failed with status code: {0}", httpResponse.StatusCode));
+
+                    // Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+                    Debug.WriteLine(httpResponse.Headers.ToString());
+
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync();
+                    Debug.WriteLine(responseContent);
+                }
+                return (returnValue);
+            }
+        }
         /// <summary>
         /// Show a progress screen. These should be posted at least every 5 seconds for a 
         /// long-running operation, such as accessing network resources over a mobile 
