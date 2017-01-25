@@ -124,7 +124,7 @@
     <value>Calculating the women proportion of {0} in {1}</value>
   </data>
   <data name="ShowFuturePopulation" xml:space="preserve">
-    <value>The population in {0} in the year {1} will be about {2} according to our calculations</value>
+    <value>The population in {0} in the year {1} will be about {2} according to our predictions</value>
   </data>
   <data name="ShowPopulation" xml:space="preserve">
     <value>The population in {0} in the year {1} was about {2} according to our data</value>

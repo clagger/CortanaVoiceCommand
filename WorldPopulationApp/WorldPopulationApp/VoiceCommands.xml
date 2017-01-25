@@ -28,8 +28,8 @@
     </Command>
     
     <Command Name="showFuturePopulationML">
-      <Example>  Calculate the population of Germany in 2018? </Example>
-      <ListenFor>Calculate the population of Germany in {year}</ListenFor>
+      <Example>Predict the population of Germany in 2018? </Example>
+      <ListenFor>Predict the population of Germany in {year}</ListenFor>
       <Feedback> Showing the population of Germany in {year} </Feedback>
       <VoiceCommandService Target="VoiceCommandService"/>
     </Command>
